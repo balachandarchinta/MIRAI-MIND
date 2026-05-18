@@ -1,7 +1,3 @@
-<div align="center">
-<img width="1200" alt="Mirai Mind Screenshot" src="assets/mirai_mind_screenshot.png" />
-</div>
-
 # 🧠 MIRAI MIND — Gemma 3 Architecture Lab
 ### 🏆 Gemma Challenge Project — Powered by Google AI Studio
 
