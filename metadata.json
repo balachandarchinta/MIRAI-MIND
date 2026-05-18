@@ -1,0 +1,6 @@
+{
+  "name": "Mirai Mind",
+  "description": "An advanced AI intelligence interface for comparing Gemma 3 model architectures, multimodal capabilities, and reasoning performance.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

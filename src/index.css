@@ -1,0 +1,53 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap');
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+}
+
+@layer base {
+  body {
+    @apply bg-[#0a0a0a] text-[#e5e5e5] antialiased sm:text-base text-sm;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  }
+}
+
+
+/* Typography refinements */
+.prose {
+  --tw-prose-body: #a3a3a3;
+  --tw-prose-headings: #ffffff;
+  --tw-prose-links: #22c55e;
+  --tw-prose-bold: #ffffff;
+  --tw-prose-counters: #22c55e;
+  --tw-prose-bullets: #22c55e;
+  --tw-prose-quotes: #22c55e;
+  --tw-prose-quote-borders: #22c55e;
+  --tw-prose-captions: #737373;
+  --tw-prose-code: #ffffff;
+  --tw-prose-pre-code: #d4d4d4;
+  --tw-prose-pre-bg: #171717;
+  --tw-prose-th-borders: #262626;
+  --tw-prose-td-borders: #262626;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0a0a0a;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #262626;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #333;
+}
