@@ -1,6 +1,8 @@
 # 🧠 MIRAI MIND — Gemma 3 Architecture Lab
 ### 🏆 Gemma Challenge Project — Powered by Google AI Studio
 
+![Mirai Mind Cognitive Intelligence System Banner](./mirai-mind-preview.jpg)
+
 **Mirai Mind** is a premium, state-of-the-art cognitive diagnostics and predictive reasoning dashboard developed for the **Gemma Challenge**. It evaluates, simulates, and visualizes how different AI model architectures reason about human metabolic risk profiles, behavioral routines, and circadian disruptions.
 
 By feeding daily routines, physical symptoms, and behavioral indicators into the engine, Mirai Mind generates multi-tiered cognitive analyses across the entire range of Google's **Gemma 3** open models.
