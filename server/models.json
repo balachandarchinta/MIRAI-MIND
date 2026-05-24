@@ -1,0 +1,134 @@
+[
+  {
+    "id": "gemma-3-2b",
+    "name": "Gemma 3 2B",
+    "type": "Dense",
+    "capabilities": {
+      "thinking": "Efficiency Focus",
+      "longContext": "8K",
+      "image": "Basic",
+      "video": "None",
+      "multimodal": "Limited",
+      "functionCalling": "Basic",
+      "coding": "Basic",
+      "multilingual": "Partial",
+      "audio": "None",
+      "scores": [
+        { "subject": "Thinking", "value": 45 },
+        { "subject": "Multimodal", "value": 30 },
+        { "subject": "Coding", "value": 40 },
+        { "subject": "Multilingual", "value": 50 },
+        { "subject": "Efficiency", "value": 95 }
+      ],
+      "benchmarks": [
+        { "metric": "GSM8K", "value": 42.5 },
+        { "metric": "MATH", "value": 12.1 },
+        { "metric": "HumanEval", "value": 31.5 },
+        { "metric": "MMLU", "value": 52.3 },
+        { "metric": "Perplexity", "value": 8.4 },
+        { "metric": "Latency (ms)", "value": 45 },
+        { "metric": "Tokens/sec", "value": 120 }
+      ]
+    },
+    "target": "On-device / Mobile / Latency Critical"
+  },
+  {
+    "id": "gemma-3-4b",
+    "name": "Gemma 3 4B",
+    "type": "Multimodal Dense",
+    "capabilities": {
+      "thinking": "Moderate",
+      "longContext": "128K",
+      "image": "Advanced",
+      "video": "Advanced",
+      "multimodal": "Native",
+      "functionCalling": "Robust",
+      "coding": "Standard",
+      "multilingual": "Full",
+      "audio": "Native",
+      "scores": [
+        { "subject": "Thinking", "value": 65 },
+        { "subject": "Multimodal", "value": 85 },
+        { "subject": "Coding", "value": 60 },
+        { "subject": "Multilingual", "value": 75 },
+        { "subject": "Efficiency", "value": 80 }
+      ],
+      "benchmarks": [
+        { "metric": "GSM8K", "value": 62.8 },
+        { "metric": "MATH", "value": 24.5 },
+        { "metric": "HumanEval", "value": 55.2 },
+        { "metric": "MMLU", "value": 64.1 },
+        { "metric": "Perplexity", "value": 6.2 },
+        { "metric": "Latency (ms)", "value": 85 },
+        { "metric": "Tokens/sec", "value": 85 }
+      ]
+    },
+    "target": "Personal Assistants / Creative Tools / Edge AI"
+  },
+  {
+    "id": "gemma-3-26b-moe",
+    "name": "Gemma 3 26B MoE",
+    "type": "Mixture of Experts",
+    "capabilities": {
+      "thinking": "Advanced",
+      "longContext": "128K",
+      "image": "High",
+      "video": "Standard",
+      "multimodal": "Integrated",
+      "functionCalling": "Expert",
+      "coding": "Advanced",
+      "multilingual": "Extensive",
+      "audio": "Standard",
+      "scores": [
+        { "subject": "Thinking", "value": 82 },
+        { "subject": "Multimodal", "value": 70 },
+        { "subject": "Coding", "value": 85 },
+        { "subject": "Multilingual", "value": 90 },
+        { "subject": "Efficiency", "value": 75 }
+      ],
+      "benchmarks": [
+        { "metric": "GSM8K", "value": 86.4 },
+        { "metric": "MATH", "value": 48.2 },
+        { "metric": "HumanEval", "value": 78.5 },
+        { "metric": "MMLU", "value": 79.8 },
+        { "metric": "Perplexity", "value": 4.8 },
+        { "metric": "Latency (ms)", "value": 150 },
+        { "metric": "Tokens/sec", "value": 110 }
+      ]
+    },
+    "target": "Efficient Enterprise Solutions / High Throughput"
+  },
+  {
+    "id": "gemma-3-31b-dense",
+    "name": "Gemma 3 31B Dense",
+    "type": "Dense",
+    "capabilities": {
+      "thinking": "State-of-the-art",
+      "longContext": "128K",
+      "image": "Expert",
+      "video": "Expert",
+      "multimodal": "Native Unified",
+      "functionCalling": "Precision",
+      "coding": "Expert-grade",
+      "multilingual": "Global",
+      "audio": "High-fidelity",
+      "scores": [
+        { "subject": "Thinking", "value": 96 },
+        { "subject": "Multimodal", "value": 94 },
+        { "subject": "Coding", "value": 92 },
+        { "subject": "Multilingual", "value": 88 },
+        { "subject": "Efficiency", "value": 60 }
+      ],
+      "benchmarks": [
+        { "metric": "GSM8K", "value": 94.2 },
+        { "metric": "MATH", "value": 58.6 },
+        { "metric": "HumanEval", "value": 86.4 },
+        { "metric": "MMLU", "value": 84.5 },
+        { "metric": "Perplexity", "value": 3.1 },
+        { "metric": "Latency (ms)", "value": 420 },
+        { "metric": "Tokens/sec", "value": 45 }
+      ]
+    },
+    "target": "Complex Reasoning / Software Dev / Deep Analysis"
+  }
+]
