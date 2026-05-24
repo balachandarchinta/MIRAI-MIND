@@ -206,6 +206,73 @@ async function startServer() {
         Behavioral: Procrastinates, feels stuck, low motivation, comfort over effort.
       `;
 
+      // 1. Guardrail check: Restrict to healthcare, wellness, and insurance
+      console.log("Running domain guardrail check...");
+      const guardrailPrompt = `
+        You are a strict domain verification filter for an advanced AI cognitive lab.
+        Your sole task is to analyze whether the provided User Profile or prompt is semantically related to at least one of these domains:
+        1. Healthcare, Medicine, Diagnostics, clinical indicators, physical/mental illnesses, or symptoms.
+        2. Wellness, lifestyle habits, circadian rhythms, sleep, routines, diet, exercise, stress, or psychological well-being.
+        3. Insurance Risk Profiling, behavioral indicators, longevity metrics, physiological risks, or underwriting factors.
+
+        INPUT TO EVALUATE:
+        "${profileSubject}"
+
+        Evaluate if the input is relevant to Healthcare, Wellness, or Insurance. If the input is completely unrelated (e.g. generic software engineering, plumbing/repair instructions, general history/politics, random chatbot text, or homework help), set isRelevant to false.
+        
+        Return a strict JSON object with:
+        {
+          "isRelevant": boolean,
+          "reason": "If isRelevant is false, write a clear, professional, helpful message reminding the user that the platform only analyzes healthcare, wellness, and insurance profiles. If true, keep this string empty."
+        }
+      `;
+
+      const guardrailModelChain = ["gemini-3-flash-preview", "gemini-3.1-flash-lite", "gemini-flash-latest"];
+      let guardrailResponse;
+      let guardrailErr: any = null;
+
+      for (const modelName of guardrailModelChain) {
+        try {
+          console.log(`Attempting guardrail check with model: ${modelName}...`);
+          guardrailResponse = await withRetry(() => activeAi.models.generateContent({
+            model: modelName,
+            contents: guardrailPrompt,
+            config: {
+              responseMimeType: "application/json",
+              responseSchema: {
+                type: Type.OBJECT,
+                properties: {
+                  isRelevant: { type: Type.BOOLEAN },
+                  reason: { type: Type.STRING }
+                },
+                required: ["isRelevant", "reason"]
+              }
+            }
+          }));
+          break; // Success!
+        } catch (err) {
+          guardrailErr = err;
+          console.warn(`Guardrail check failed for ${modelName}. Trying next...`);
+        }
+      }
+
+      if (!guardrailResponse) {
+        throw guardrailErr || new Error("Failed to initialize domain guardrail engine.");
+      }
+
+      let guardrailResult = { isRelevant: true, reason: "" };
+      try {
+        const rawText = guardrailResponse.text.trim();
+        guardrailResult = JSON.parse(rawText);
+      } catch (jsonErr) {
+        console.warn("Failed to parse guardrail JSON response. Defaulting to allow.", jsonErr);
+      }
+
+      if (!guardrailResult.isRelevant) {
+        console.warn("Input blocked by domain guardrail:", guardrailResult.reason);
+        return res.status(400).json({ error: guardrailResult.reason || "Platform Scoping Restriction: Input must be relevant to healthcare, wellness, or insurance domains." });
+      }
+
       const systemPrompt = `
         You are an advanced AI Model Architecture Analyst powered by Gemini for Mirai Mind.
         Your purpose is to deeply analyze and compare different AI model architectures (Gemma 3 variants) by evaluating how they would reason about a specific "Intelligence Subject" (the provided User Risk Profile).
