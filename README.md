@@ -74,3 +74,24 @@ Ensure you have **Node.js** installed, then execute:
    npm run dev
    ```
    Open your browser and navigate to `http://localhost:3000`.
+
+---
+
+## ☁️ Containerization & Cloud Run Architecture
+
+The codebase has been engineered and optimized to support secure, lightweight containerization and continuous delivery on **Google Cloud Run**:
+
+### 1. 🛡️ Semantic Domain Guardrail
+*   **Purpose:** Restricts the AI reasoning cluster exclusively to inputs relevant to **Healthcare** (diagnostics, symptoms), **Wellness** (lifestyle, habits, circadian sleep logs), and **Insurance Risk Profiling** (behavioral risk evaluation, longevity).
+*   **Behavior:** Uses a lightweight JSON guardrail prompt on a fast model (`gemini-flash-latest`) to semantically classify user profiles. Irrelevant inputs (e.g., general programming, math, politics) are immediately blocked with a `400 Bad Request` and a helpful scoping error.
+*   **UI Integration:** Validation errors are automatically intercepted and rendered natively in the frontend's custom error triage card.
+
+### 2. 🐋 Production Multi-Stage Dockerfile
+*   **Builder Stage:** Uses `node:20-alpine` to compile all Vite client assets and bundle the Express server into `dist/server.cjs` via `esbuild`.
+*   **Runner Stage:** Employs a clean, minimal Alpine node environment that copies only the built static assets and server bundle, installing *only* production-level dependencies (omitting all heavy compiler tools). This minimizes container size and increases load efficiency.
+*   **.dockerignore Rules:** Heavily filtered to keep local logs, secrets (`.env`), git structures, and `node_modules` completely out of the build context.
+
+### 3. 🔒 Enterprise-Grade Secret Management
+*   Supports binding `GEMINI_API_KEY` securely from **Google Cloud Secret Manager** (`gemini-api-key:latest`) directly as an environment variable in Cloud Run, eliminating plain-text credential leaks in the environment panel.
+*   Supports dynamic port routing, binding automatically to the injected `process.env.PORT` variable.
+
